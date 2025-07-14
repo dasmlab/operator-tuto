@@ -26,16 +26,16 @@ The operator pattern extends Kubernetes to manage complex applications by encodi
 
 ## Operator Example Worflow Diagram
 ```mermaid
-flowchart TD
-    A[User applies Custom Resource] --> B[Kubernetes API Server]
-    B --> C[Operator Watches for Resource Changes]
-    C --> D[Operator Reconciliation Loop]
-    D --> E[Compare Desired State vs Actual State]
+flowchart LR
+    A[User applies<br>Custom Resource] --> B[Kubernetes API Server]
+    B --> C[Operator Watches<br>for Resource]
+    C --> D[Reconciliation Loop]
+    D --> E[Compare Desired<br>State vs Actual State]
     E -- Different --> F[Operator Takes Action]
-    F --> G[Cluster Resources Updated]
-    G --> H[Operator Monitors State]
-    H --> D
-    E -- Same --> I[No Action Needed, Wait for Event]
+    F --> G[Update<br>Cluster Resources]
+    G --> H[Monitor<br>Cluster State]
+    H --> E
+    E -- Same --> I[No Action Needed,<br>Wait for Event]
 
     style D fill:#f9f,stroke:#333,stroke-width:2px
 ```
