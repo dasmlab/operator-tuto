@@ -24,6 +24,21 @@ A Kubernetes operator is a method of packaging, deploying, and managing a Kubern
 
 The operator pattern extends Kubernetes to manage complex applications by encoding operational knowledge into software.
 
+## Operator Example Worflow Diagram
+```mermaid
+flowchart TD
+    A[User applies CR (Custom Resource)] --> B[Kubernetes API Server]
+    B --> C[Operator watches for CR changes]
+    C --> D[Operator Reconciliation Loop]
+    D --> E[Compare Desired State (CR) vs Actual State (Cluster)]
+    E -->|If different| F[Operator takes action (create/update/delete resources)]
+    F --> G[Cluster Resources updated]
+    G --> H[Operator monitors for state changes]
+    H --> D
+    E -->|If equal| I[No action needed, wait for next event]
+
+    style D fill:#f9f,stroke:#333,stroke-width:2px
+```
 ## Prerequisites
 
 Before starting this tutorial, ensure you have the following tools installed:
@@ -46,12 +61,13 @@ Before starting this tutorial, ensure you have the following tools installed:
   ```
 
 #### 2. Kubebuilder
-- **Version**: Latest stable
+- **Version**: 4.7.0 (latest stable)
+- **Note**: For new projects, you must use the v4 plugin and project version.
 - **Installation**:
   ```bash
   # Download and install kubebuilder
   curl -L -o kubebuilder https://go.kubebuilder.io/dl/latest/$(go env GOOS)/$(go env GOARCH)
-  chmod +x kubebuilder && mv kubebuilder /usr/local/bin/
+  chmod +x kubebuilder && sudo mv kubebuilder /usr/local/bin/
   
   # Verify installation
   kubebuilder version
@@ -155,8 +171,8 @@ my-operator/
 
 ### 1. Initialize the Project
 ```bash
-# Create a new operator project
-kubebuilder init --domain example.com --repo example.com/my-operator
+# Create a new operator project (Kubebuilder v4.x)
+kubebuilder init --plugins go/v4 --project-version=4 --domain example.com --repo example.com/my-operator
 
 # Navigate to the project directory
 cd my-operator
