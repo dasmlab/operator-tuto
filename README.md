@@ -24,7 +24,7 @@ A Kubernetes operator is a method of packaging, deploying, and managing a Kubern
 
 The operator pattern extends Kubernetes to manage complex applications by encoding operational knowledge into software.
 
-## Operator Example Worflow Diagram
+## Operator Example Workflow Diagram
 ```mermaid
 flowchart LR
     A[User applies<br>Custom Resource] --> B[Kubernetes API Server]
@@ -171,17 +171,17 @@ my-operator/
 
 ### 1. Initialize the Project
 ```bash
-# Create a new operator project (Kubebuilder v4.x)
-kubebuilder init --plugins go/v4 --project-version=4 --domain example.com --repo example.com/my-operator
+# Create the directory for your operator (my-operator)
+mkdir my-operator && cd my-operator
 
-# Navigate to the project directory
-cd my-operator
+# Create a new operator project (Kubebuilder v4.x)
+kubebuilder init --plugins go.kubebuilder.io/v4 --domain dasmlab.org --repo dasmlab.org/my-operator
 ```
 
 ### 2. Add API (Custom Resource)
 ```bash
 # Create a new API with Group, Version, Kind (GVK)
-kubebuilder create api --group mygroup --version v1alpha1 --kind MyResource
+kubebuilder create api --group tutos --version v1alpha1 --kind SimpleCRD
 
 # This will prompt you to:
 # - Create Resource [y/n]: y

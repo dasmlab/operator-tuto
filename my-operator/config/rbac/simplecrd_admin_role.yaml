@@ -1,0 +1,38 @@
+# This rule is not used by the project my-operator itself.
+# It is provided to allow the cluster admin to help manage permissions for users.
+#
+# Grants full permissions ('*') over tutos.dasmlab.org.
+# This role is intended for users authorized to modify roles and bindings within the cluster,
+# enabling them to delegate specific permissions to other users or groups as needed.
+#
+#
+# THIS ALSO GRANTS FULL PERMISSION TO THE CLUSTER - THIS IS INSECURE AND FOR EXAMLPE PURPOSE ONLY!!!
+#   DONT USE THIS IN PRODUCTION, use "least privileged approach"
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: my-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: simplecrd-admin-role
+rules:
+- apiGroups:
+  - tutos.dasmlab.org
+  resources:
+  - simplecrds
+  verbs:
+  - '*'
+- apiGroups:
+  - tutos.dasmlab.org
+  resources:
+  - simplecrds/status
+  verbs:
+  - get
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - '*'
+

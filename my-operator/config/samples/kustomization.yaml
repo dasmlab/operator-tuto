@@ -1,0 +1,5 @@
+## Append samples of your project ##
+resources:
+- tutos_v1alpha1_simplecrd.yaml
+- tutos_v1alpha1_deployercrd.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
